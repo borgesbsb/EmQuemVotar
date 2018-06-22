@@ -8,15 +8,31 @@ import { retry } from 'rxjs/operators';
 
 
 export interface CandidatoDetathe {
-  candidato_id: number;
-  candidato_name: string;
-  candidato_peso: number;
+  candidate_cpf: string;
+  source_id: number;
+  source_processed: boolean;
+  source_type: string;
+  source_url: string;
 }
+
+export interface CandidatoDetathe {
+  candidate_cpf: string;
+  source_id: number;
+  source_processed: boolean;
+  source_type: string;
+  source_url: string;
+}
+
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class CandidatosRecomendadosService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
+
+
+
+
 }
