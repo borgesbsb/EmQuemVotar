@@ -4,6 +4,7 @@ import {Tema} from './tema/tema.model';
 import {Theme, AvaliarTemasService, Resposta, Rating, Resposta2} from './avaliar-temas.service';
 import { HttpErrorHandler } from '../http-error-handler.service';
 import { CandidatosRecomendadosService } from '../candidatos-recomendados.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -26,7 +27,7 @@ themes_recomender = [];
 cadastrando_peso: Resposta2;
 _candidatosLista: CandidatosRecomendadosService;
 
-  constructor(private themesService: AvaliarTemasService, _candidatosLista: CandidatosRecomendadosService) {
+  constructor(private themesService: AvaliarTemasService, _candidatosLista: CandidatosRecomendadosService,  private router: Router) {
     this.themesService.getThemesAll().subscribe(
       (data: Resposta) =>  { this.themes = data['themes'];
         this.setRecomender(this.themes);
@@ -88,16 +89,18 @@ _candidatosLista: CandidatosRecomendadosService;
             lista_recomendacao =>  {
               this._candidatosLista.setRecomendacao(lista_recomendacao['candidates']);
               console.log(this._candidatosLista.getRecomendacao());
+                this.router.navigate(['/candidatos-recomendados']);
             }
           );
         }
       }
     );
+
+
+
   }
 
   ngOnInit() {
   }
 
 }
-
-
