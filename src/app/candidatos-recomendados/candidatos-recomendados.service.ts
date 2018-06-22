@@ -30,7 +30,7 @@ export interface CandidatoDetathe {
 })
 export class CandidatosRecomendadosService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
 
 
