@@ -21,20 +21,26 @@ export interface Email {
   providedIn: 'root'
 })
 export class HomeService {
-
+  private email: Email;
   emailUrl = 'https://emquemvotar-api-heroku.herokuapp.com/api/auth/register';
 
-  constructor(
-      private http: HttpClient
-     ) {
+  constructor( private http: HttpClient ) {}
 
-      }
+  setEmail(email) {
+    this.email = email;
+  }
 
-  addEmail (email: Email): Observable<Email> {
-    return this.http.post<Email>(this.emailUrl, email, httpOptions )
+  getEmail() {
+    return this.email;
+  }
+
+  addEmail () {
+    return this.http.post(this.emailUrl, this.email, httpOptions )
     .pipe(
       retry(3)
     );
   }
+
+
 
 }

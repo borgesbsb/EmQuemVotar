@@ -21,41 +21,18 @@ import {AvaliarTemasService} from '../avaliar-temas/avaliar-temas.service';
 export class HomeComponent implements OnInit {
 
     email = '';
+    private status_code: string;
 
-    constructor(private homeService: HomeService, private userService: UserService, private router: Router) {
-      this.homeService = homeService;
-      this.userService = userService;
-   }
 
-  addEmail(user_email:  string) {
-    const newEmail: Email = { user_email } as Email;
-    this.homeService.addEmail(newEmail).subscribe(
-    );
+  constructor(private homeService: HomeService, private router: Router) {
+    this.status_code = '';
   }
 
+
   goThemes(user_email:  string) {
-      console.log("go themes");
-      console.log(user_email);
     const newEmail: Email = { user_email } as Email;
-    this.homeService.addEmail(newEmail).subscribe(
-      res => { console.log(res['status']);
-               this.email = user_email;
-      },
-      (err: HttpErrorHandler) => {
-        if (err.error instanceof Error) {
-          console.log(err);
-
-          this.email = user_email;
-        } else {
-          console.log(err.error);
-          console.log("que foi enviado email");
-          this.userService.setUserEmail(user_email);
-          console.log(this.userService.getUserEmail());
-          this.router.navigate([`/avaliar-temas/${this.userService.getUserEmail()}`]);
-        }
-      }
-    );
-
+    this.homeService.setEmail(newEmail);
+    this.router.navigate(['/avaliar-temas']);
   }
 
   ngOnInit() {

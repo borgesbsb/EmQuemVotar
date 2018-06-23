@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { retry } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
+import { Email } from '../home/home.service';
 
 
 
@@ -51,6 +52,8 @@ export class AvaliarTemasService {
 
   recomendar_url =  'https://emquemvotar-api-heroku.herokuapp.com/api/recommender/';
 
+  gerar_similaridade_url = 'https://emquemvotar-api-heroku.herokuapp.com/api/recommender/register';
+
 
   constructor(private http: HttpClient) { }
 
@@ -68,12 +71,17 @@ export class AvaliarTemasService {
     );
   }
 
+  gerarSimilaridade(email: string) {
+    // tslint:disable-next-line:prefer-const
+    let email_objeto = { user_email: email } as Email;
+    return this.http.post( this.gerar_similaridade_url, email_objeto, httpOptions).pipe(
+      retry(3)
+    );
+  }
+
   recomendar(email: string) {
 
     // tslint:disable-next-line:max-line-length
-    this.http.post( 'https://emquemvotar-api-heroku.herokuapp.com/api/recommender/register', '{\'user_email\':' + '\'' + email + '\'' + '}', httpOptions).pipe(
-      retry(3)
-    );
     return this.http.get(this.recomendar_url + email, httpOptions )
     .pipe(
       retry(3)
