@@ -17,13 +17,13 @@ export class CandidatosRecomendadosComponent implements OnInit {
   constructor(
     private _candidatosRecomendadosService: CandidatosRecomendadosService, private router: Router) {
     this._candidatosLista = _candidatosRecomendadosService.getRecomendacao();
-    console.log(this._candidatosLista);
-    console.log('init');
+
    }
 
    getPerfil(candidate_cpf) {
     this._candidatosRecomendadosService.getSourceCandidate(candidate_cpf).subscribe(
-      (sourceDetalhes: SourceDetalhes) => { this.candidatoDetalhe = sourceDetalhes['sources'];
+      (sourceDetalhes: SourceDetalhes) => {
+        this.candidatoDetalhe = sourceDetalhes['sources'];
      }
     );
     this.router.navigate(['/candidato-detalhes']);

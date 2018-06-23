@@ -1,3 +1,4 @@
+import { CandidatoDetathe, CandidatosRecomendadosService } from './../candidatos-recomendados.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,8 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./candidato-detalhes.component.css']
 })
 export class CandidatoDetalhesComponent implements OnInit {
-
-  constructor() { }
+  private source: CandidatoDetathe[];
+  constructor(private candidatoDetathe: CandidatosRecomendadosService) {
+    this.source = this.candidatoDetathe;
+   }
 
   ngOnInit() {
   }
