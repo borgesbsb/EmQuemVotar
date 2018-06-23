@@ -4,13 +4,14 @@ import {Tema} from './tema/tema.model';
 import {Theme, AvaliarTemasService, Resposta, Rating, Resposta2} from './avaliar-temas.service';
 import { HttpErrorHandler } from '../http-error-handler.service';
 import { CandidatosRecomendadosService } from '../candidatos-recomendados.service';
-import { Router } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {UserService} from '../user.service';
 
 
 @Component({
   selector: 'eqv-avaliar-temas',
   templateUrl: './avaliar-temas.component.html',
-  providers: [ AvaliarTemasService ],
+  providers: [ AvaliarTemasService, UserService ],
   styleUrls: ['./avaliar-temas.component.css']
 })
 
@@ -27,13 +28,16 @@ themes_recomender = [];
 cadastrando_peso: Resposta2;
 _candidatosLista: CandidatosRecomendadosService;
 
-  constructor(private themesService: AvaliarTemasService, _candidatosLista: CandidatosRecomendadosService,  private router: Router) {
+
+  constructor( private route: ActivatedRoute, private themesService: AvaliarTemasService, private _userEmail: UserService, _candidatosLista: CandidatosRecomendadosService, private router: Router) {
     this.themesService.getThemesAll().subscribe(
       (data: Resposta) =>  { this.themes = data['themes'];
         this.setRecomender(this.themes);
       }
      );
     this._candidatosLista = _candidatosLista;
+    this._userEmail.setUserEmail(this.route.params['value']['email']);
+      console.log(this.route.params['value']['email']);
    }
 
    setRecomender(thma) {
@@ -67,8 +71,11 @@ _candidatosLista: CandidatosRecomendadosService;
       return messagem;
     }
 
-  goRecomender() {
-    this.email = 'borges.bnjamin@gmail.com';
+     goRecomender() {
+    this.email = this._userEmail.getUserEmail();
+
+    console.log("vai recomendar");
+    console.log(this.email);
     console.log(this.criandoString(this.themes_recomender));
     this.cadastrando_peso = { user_email: this.email, user_ratings: this.criandoString(this.themes_recomender)};
     this.themesService.addPesos(this.cadastrando_peso).subscribe(
@@ -95,9 +102,6 @@ _candidatosLista: CandidatosRecomendadosService;
         }
       }
     );
-
-
-
   }
 
   ngOnInit() {

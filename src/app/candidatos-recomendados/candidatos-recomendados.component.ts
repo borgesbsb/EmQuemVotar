@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CandidatosRecomendadosService, Candidato } from '../candidatos-recomendados.service';
+import {UserService} from '../user.service';
 
 
 @Component({
   selector: 'eqv-candidatos-recomendados',
   templateUrl: './candidatos-recomendados.component.html',
-  providers: [],
+    providers: [ ],
   styleUrls: ['./candidatos-recomendados.component.css']
 })
 export class CandidatosRecomendadosComponent implements OnInit {
@@ -14,14 +15,14 @@ export class CandidatosRecomendadosComponent implements OnInit {
   constructor(_candidatosLista: CandidatosRecomendadosService) {
     this._candidatosLista = _candidatosLista.getRecomendacao();
     console.log(this._candidatosLista);
+    console.log("init")
    }
 
    getPerfil(candidate_cpf) {
-     
+
    }
 
   ngOnInit() {
   }
 
 }
-
