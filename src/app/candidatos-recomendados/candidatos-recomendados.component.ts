@@ -26,10 +26,7 @@ export class CandidatosRecomendadosComponent implements OnInit {
       (sourceDetalhes: SourceDetalhes) => { this.candidatoDetalhe = sourceDetalhes['sources'];
      }
     );
-
     this.router.navigate(['/candidato-detalhes']);
-
-
    }
 
   ngOnInit() {
