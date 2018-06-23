@@ -1,5 +1,6 @@
+import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
-import { CandidatosRecomendadosService, Candidato } from '../candidatos-recomendados.service';
+import { CandidatosRecomendadosService, Candidato, SourceDetalhes, CandidatoDetathe } from '../candidatos-recomendados.service';
 
 
 @Component({
@@ -9,15 +10,20 @@ import { CandidatosRecomendadosService, Candidato } from '../candidatos-recomend
   styleUrls: ['./candidatos-recomendados.component.css']
 })
 export class CandidatosRecomendadosComponent implements OnInit {
-  _candidatosLista: Candidato[];
+  private _candidatosLista: Candidato[];
+  private candidatoDetalhe: CandidatoDetathe[];
 
-  constructor(_candidatosLista: CandidatosRecomendadosService) {
-    this._candidatosLista = _candidatosLista.getRecomendacao();
+
+  constructor(private _candidatosRecomendadosService: CandidatosRecomendadosService) {
+    this._candidatosLista = _candidatosRecomendadosService.getRecomendacao();
     console.log(this._candidatosLista);
    }
 
    getPerfil(candidate_cpf) {
-     
+    this._candidatosRecomendadosService.getSourceCandidate(candidate_cpf).subscribe(
+      (sourceDetalhes: SourceDetalhes) => { this.candidatoDetalhe = sourceDetalhes['sources'];
+     }
+    );
    }
 
   ngOnInit() {
