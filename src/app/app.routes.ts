@@ -11,7 +11,7 @@ import {HeaderComponent} from './header/header.component'
 export const ROUTES: Routes = [
 	{path: '', component: HomeComponent},
 	{path: 'about', component: AboutComponent},
-	{path: 'avaliar-temas', component: AvaliarTemasComponent},
+	{path: 'avaliar-temas/:email', component: AvaliarTemasComponent},
 	{path: 'temas/:id', component: TemaSubtemasComponent},
 	{path: 'candidatos-recomendados', component: CandidatosRecomendadosComponent},
 	{path: 'candidato-detalhes', component: CandidatoDetalhesComponent},
