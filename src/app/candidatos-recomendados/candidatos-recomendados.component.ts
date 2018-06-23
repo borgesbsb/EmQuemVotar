@@ -1,6 +1,7 @@
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { CandidatosRecomendadosService, Candidato, SourceDetalhes, CandidatoDetathe } from '../candidatos-recomendados.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -14,7 +15,8 @@ export class CandidatosRecomendadosComponent implements OnInit {
   private candidatoDetalhe: CandidatoDetathe[];
 
 
-  constructor(private _candidatosRecomendadosService: CandidatosRecomendadosService) {
+  constructor(
+    private _candidatosRecomendadosService: CandidatosRecomendadosService, private router: Router) {
     this._candidatosLista = _candidatosRecomendadosService.getRecomendacao();
     console.log(this._candidatosLista);
    }
@@ -24,9 +26,14 @@ export class CandidatosRecomendadosComponent implements OnInit {
       (sourceDetalhes: SourceDetalhes) => { this.candidatoDetalhe = sourceDetalhes['sources'];
      }
     );
+
+    this.router.navigate(['/candidato-detalhes']);
+
+
    }
 
   ngOnInit() {
+
   }
 
 }
