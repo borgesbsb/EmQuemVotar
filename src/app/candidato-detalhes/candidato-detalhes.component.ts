@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class CandidatoDetalhesComponent implements OnInit {
   private source: CandidatoDetathe[];
   constructor(private candidatoDetathe: CandidatosRecomendadosService) {
-    this.source = this.candidatoDetathe;
+  //  this.source = this.candidatoDetathe;
    }
 
   ngOnInit() {
