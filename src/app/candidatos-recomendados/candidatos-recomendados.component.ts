@@ -6,26 +6,21 @@ import { Router, ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'eqv-candidatos-recomendados',
   templateUrl: './candidatos-recomendados.component.html',
-    providers: [ ],
+  providers: [],
   styleUrls: ['./candidatos-recomendados.component.css']
 })
 export class CandidatosRecomendadosComponent implements OnInit {
   private _candidatosLista: Candidato[];
   private candidatoDetalhe: CandidatoDetathe[];
 
-
   constructor(
-    private _candidatosRecomendadosService: CandidatosRecomendadosService, private router: Router) {
-    this._candidatosLista = _candidatosRecomendadosService.getRecomendacao();
-
+    private _candidatosRecomendadosService: CandidatosRecomendadosService,
+    private router: Router) {
+      this._candidatosLista = _candidatosRecomendadosService.getRecomendacao();
    }
 
-   getPerfil(candidate_cpf) {
-    this._candidatosRecomendadosService.getSourceCandidate(candidate_cpf).subscribe(
-      (sourceDetalhes: SourceDetalhes) => {
-        this.candidatoDetalhe = sourceDetalhes['sources'];
-     }
-    );
+   getPerfil(candidato) {
+    this._candidatosRecomendadosService.setCandidato(candidato);
     this.router.navigate(['/candidato-detalhes']);
    }
 

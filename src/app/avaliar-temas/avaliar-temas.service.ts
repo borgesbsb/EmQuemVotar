@@ -6,23 +6,16 @@ import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Email } from '../home/home.service';
 
 
-
-
-
 export interface Theme {
   theme_id: number;
   theme_name: string;
   theme_peso: number;
 }
 
-
-
 export interface Resposta {
   status:  string;
   themes: Theme[];
 }
-
-
 
 const httpOptions = {
   headers: new HttpHeaders({
