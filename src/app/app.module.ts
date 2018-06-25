@@ -57,7 +57,7 @@ import { StarRatingModule } from 'angular-star-rating';
     StarRatingModule.forRoot(),
     MatSliderModule
         ],
-  providers: [HttpErrorHandler, CandidatosRecomendadosService],
+  providers: [HttpErrorHandler],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

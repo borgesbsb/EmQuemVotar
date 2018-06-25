@@ -11,7 +11,6 @@ import {AvaliarTemasService} from '../avaliar-temas/avaliar-temas.service';
 @Component({
   selector: 'eqv-home',
   templateUrl: './home.component.html',
-  providers: [ UserService ],
   styleUrls: ['./home.component.css']
 })
 

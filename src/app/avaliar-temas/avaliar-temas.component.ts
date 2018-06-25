@@ -3,16 +3,15 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import {Tema} from './tema/tema.model';
 import {Theme, AvaliarTemasService, Resposta, Rating, Resposta2} from './avaliar-temas.service';
 import { HttpErrorHandler } from '../http-error-handler.service';
-import { CandidatosRecomendadosService } from '../candidatos-recomendados.service';
+import { CandidatosRecomendadosService, CandidatoDetathe, Candidato } from '../candidatos-recomendados.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {UserService} from '../user.service';
 import { HomeService } from '../home/home.service';
 
 
 @Component({
   selector: 'eqv-avaliar-temas',
   templateUrl: './avaliar-temas.component.html',
-  providers: [ AvaliarTemasService, UserService ],
+  providers: [ AvaliarTemasService],
   styleUrls: ['./avaliar-temas.component.css']
 })
 
@@ -23,7 +22,7 @@ email = '';
 themes: Theme[];
 themes_recomender = [];
 cadastrando_peso: Resposta2;
-_candidatosLista: CandidatosRecomendadosService;
+candidatosLista: Candidato[];
 status_code = '';
 
 
@@ -32,15 +31,14 @@ status_code = '';
     private route: ActivatedRoute,
     private themesService: AvaliarTemasService,
     private _userEmail: HomeService,
-    _candidatosLista: CandidatosRecomendadosService,
+    private candidatoService: CandidatosRecomendadosService,
     private router: Router) {
     this.themesService.getThemesAll().subscribe(
       (data: Resposta) =>  { this.themes = data['themes'];
         this.setRecomender(this.themes);
       }
      );
-    this._candidatosLista = _candidatosLista;
-    this.email = this._userEmail.getEmail().user_email;
+      this.email = this._userEmail.getEmail().user_email;
       console.log(this.email);
    }
 
@@ -87,7 +85,7 @@ status_code = '';
     gerarRecomendacao() {
       this.themesService.recomendar(this.email).subscribe(
           lista_recomendacao => {
-          this._candidatosLista.setRecomendacao(lista_recomendacao['candidates']);
+          this.candidatoService.setRecomendacao(lista_recomendacao['candidates']);
           this.router.navigate(['/candidatos-recomendados']);
         }
       );

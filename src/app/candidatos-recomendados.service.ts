@@ -1,3 +1,4 @@
+import { CandidatoDetathe } from './candidatos-recomendados.service';
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Observable, pipe } from 'rxjs';
@@ -37,13 +38,25 @@ export interface SourceDetalhes {
 }
 
 
-
-
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class CandidatosRecomendadosService {
   private rota_source = 'http://emquemvotar-api-heroku.herokuapp.com/api/source/';
   private candidatosRecomendados: Candidato[];
+  private candidatoDetalhes: CandidatoDetathe[];
+  private candidato: Candidato;
+
   constructor(private http: HttpClient) { }
+
+  getCandidato() {
+    return this.candidato;
+  }
+
+
+  setCandidato( candidato ) {
+    this.candidato = candidato;
+  }
 
   setRecomendacao(candidatos) {
     this.candidatosRecomendados = candidatos;
@@ -53,9 +66,16 @@ export class CandidatosRecomendadosService {
     return this.candidatosRecomendados;
   }
 
+  setCandidatoDetalhes(candidatoDetalhes: CandidatoDetathe[] ) {
+    this.candidatoDetalhes = candidatoDetalhes;
+  }
 
-  getSourceCandidate(cpf): Observable<SourceDetalhes> {
-    return this.http.get<SourceDetalhes>(this.rota_source + '/items')
+  getCandidatoDetalhes() {
+    return this.candidatoDetalhes;
+  }
+
+  getSourceCandidate(cpf):Observable<CandidatoDetathe[]> {
+    return this.http.get<CandidatoDetathe[]>(this.rota_source + cpf + '/items')
     .pipe(
       retry(3)
     );
