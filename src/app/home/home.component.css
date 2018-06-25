@@ -1,16 +1,38 @@
-.classUrna{
-	margin-top: 10%;
-}
-
-.img-fluid#IdUrna{
-	 max-width: auto; 
-	 height: auto;
-	}
 .btn-xl {
     font-size: 18px;
     padding: 20px 40px;
 
 }
-.textoHome{
-	padding-bottom: 5%;
+
+.bg-home{
+    color: black;
+    overflow: auto;
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    overflow: hidden;  
+    
 }
+.bg-home img.img-back{
+    width: 100%;
+    display: block;
+    height: 570px;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+    transition: opacity 1s;
+    opacity: 1;
+}
+.button-avaliar{
+	padding: 0 3%;
+    position: absolute;
+    top: 22%;
+    transition: color 1s;
+    width: 30%;
+}
+h2{
+	font-size: 32px;
+    font-weight: 84;
+    line-height: 46px;
+}
+

@@ -4,7 +4,7 @@
 
 
 body{
-	background: white;
+	
 	overflow-x: hidden;
 
 }
@@ -21,7 +21,7 @@ body{
 }
 
 .rowTemas{
-	padding-top: 5%;
+	padding-top: 2%;
 	alignment-baseline: central;
 	padding-right: 30%;
 	padding-left: 30%;
