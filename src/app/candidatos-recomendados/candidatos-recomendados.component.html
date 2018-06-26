@@ -7,8 +7,8 @@
     <li class="breadcrumb-item active" aria-current="page">Presidente da República</li>
   </ol>
 </nav>
+
 <div *ngFor= "let candidatos_recomendados of _candidatosLista">
-  <a [routerLink]="['/candidato-detalhes']"  >
     <div class="card mt-2 ">
       <div class="card-body list-group-item list-group-item-action">
         <div class="media">
@@ -29,6 +29,5 @@
         </div>
       </div>
     </div>
-  </a>
 </div>
 </div>
