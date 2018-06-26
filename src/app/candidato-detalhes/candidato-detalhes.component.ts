@@ -17,6 +17,7 @@ export class CandidatoDetalhesComponent implements OnInit {
       this.detalhesPerfil = this.candidatoService.getCandidatoDetalhes();
       this.candidatoService.getSourceCandidate(this.candidato.candidate_cpf).subscribe(
         sourceDetalhes => { this.detalhesPerfil = sourceDetalhes['sources'];
+        
         }
    );
 
