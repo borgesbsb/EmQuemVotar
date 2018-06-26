@@ -1,6 +1,5 @@
-<div class="container">
-	<div class="classUrna ">
-		<div class="container ">
+<!--<div class="classUrna ">
+	<div class="container ">
 		  <div class="row ">
 		    <div class="col-sm-9 col-lg-3">
 		      <img src="../../assets/img/urna_circle2-02.png"  id="IdUrna" class="img-fluid mx-auto d-block " alt="EmQuemVotar">
@@ -17,11 +16,27 @@
 					 class="form-control mb-4 align-self-center form-control"
 					 name="email" placeholder="Email"
 					 required>
-            </div>
+            </div>-->
           <!--button (click)="addEmail(email.value); email.value='' "  class="btn btn-outline-success btn-xl text-uppercase">Selecionar Temas</button-->
-          <button (click)= "goThemes(email.value);"  class="btn btn-outline-success btn-xl text-uppercase">Selecionar Temas</button>
+        <!--  <button (click)= "goThemes(email.value);"  class="btn btn-outline-success btn-xl text-uppercase">Selecionar Temas</button>
           <router-outlet></router-outlet>
-        </div><!--Fim do container -->
+        </div>
+	</div>
+</div> -->
+<div class="bg-home">
+	<img src="../../assets/img/home/urna2.jpg" class="img-back" alt="emquemvotar">
+	<div class="button-avaliar">
+		<h2 class="text-white text-lg-left font-weight-normal">
+			Avalie os temas mais relevantes pra você nas propostas de um candidato e receba as recomendações dos nossos robôs!
+		</h2>
+		<div class="form-group"  >
+              <input type="text" #email
+					 class="form-control  mt-2 align-self-center form-control"
+					 name="email" placeholder="Insira seu email"
+					 required>
+        </div>
+		<button (click)= "goThemes(email.value);"  class="btn btn-success btn-xl text-uppercase mt-3">Avaliar Temas</button> 
+		<router-outlet></router-outlet>
 	</div>
 </div>
-
+	
