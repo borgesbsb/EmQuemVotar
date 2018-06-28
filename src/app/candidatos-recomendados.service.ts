@@ -1,3 +1,4 @@
+import { Rating } from './avaliar-temas/avaliar-temas.service';
 import { CandidatoDetathe } from './candidatos-recomendados.service';
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
@@ -37,12 +38,23 @@ export interface SourceDetalhes {
   sources: CandidatoDetathe[];
 }
 
+export interface Similaridade {
+  candidate_cpf: string;
+  rating: number;
+  user_id: number;
+}
+
+export interface SimilaridadeResponse {
+  similarity: Similaridade[];
+  status: string;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class CandidatosRecomendadosService {
   private rota_source = 'http://emquemvotar-api-heroku.herokuapp.com/api/source/';
+  private rota_similaridade = 'https://emquemvotar-api-heroku.herokuapp.com/api/similarity/';
   private candidatosRecomendados: Candidato[];
   private candidatoDetalhes: CandidatoDetathe[];
   private candidato: Candidato;
@@ -74,11 +86,19 @@ export class CandidatosRecomendadosService {
     return this.candidatoDetalhes;
   }
 
-  getSourceCandidate(cpf):Observable<CandidatoDetathe[]> {
+  getSourceCandidate(cpf): Observable<CandidatoDetathe[]> {
     return this.http.get<CandidatoDetathe[]>(this.rota_source + cpf + '/items')
     .pipe(
       retry(3)
     );
+  }
+
+  getSimilaridade(email: string): Observable<SimilaridadeResponse> {
+    return this.http.get<SimilaridadeResponse>(this.rota_similaridade + email)
+    .pipe(
+      retry(3)
+    );
+
   }
 
 }
