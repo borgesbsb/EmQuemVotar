@@ -176,15 +176,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _contatos_contatos_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./contatos/contatos.component */ "./src/app/contatos/contatos.component.ts");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 /* harmony import */ var _app_routes__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./app.routes */ "./src/app/app.routes.ts");
-/* harmony import */ var angular_star_rating__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! angular-star-rating */ "./node_modules/angular-star-rating/dist/index.js");
-/* harmony import */ var angular_star_rating__WEBPACK_IMPORTED_MODULE_22___default = /*#__PURE__*/__webpack_require__.n(angular_star_rating__WEBPACK_IMPORTED_MODULE_22__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-
 
 
 
@@ -233,7 +230,6 @@ var AppModule = /** @class */ (function () {
                 _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"],
                 ngx_loading__WEBPACK_IMPORTED_MODULE_6__["LoadingModule"],
                 _angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterModule"].forRoot(_app_routes__WEBPACK_IMPORTED_MODULE_21__["ROUTES"]),
-                angular_star_rating__WEBPACK_IMPORTED_MODULE_22__["StarRatingModule"].forRoot(),
                 _angular_material_slider__WEBPACK_IMPORTED_MODULE_7__["MatSliderModule"]
             ],
             providers: [_http_error_handler_service__WEBPACK_IMPORTED_MODULE_5__["HttpErrorHandler"]],

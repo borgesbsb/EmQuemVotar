@@ -56,7 +56,6 @@ import { StarRatingModule } from 'angular-star-rating';
     FormsModule,
     LoadingModule,
     RouterModule.forRoot(ROUTES),
-    StarRatingModule.forRoot(),
     MatSliderModule
         ],
   providers: [HttpErrorHandler],
