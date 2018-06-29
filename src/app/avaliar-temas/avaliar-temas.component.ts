@@ -5,7 +5,7 @@ import {Theme, AvaliarTemasService, Resposta, Rating, Resposta2} from './avaliar
 import { HttpErrorHandler } from '../http-error-handler.service';
 import { CandidatosRecomendadosService, CandidatoDetathe, Candidato } from '../candidatos-recomendados.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import { HomeService } from '../home/home.service';
+import { HomeService, Email } from '../home/home.service';
 
 
 @Component({
@@ -24,6 +24,7 @@ themes_recomender = [];
 cadastrando_peso: Resposta2;
 candidatosLista: Candidato[];
 status_code = '';
+public loading = false;
 
 
   // tslint:disable-next-line:max-line-length
@@ -33,14 +34,29 @@ status_code = '';
     private _userEmail: HomeService,
     private candidatoService: CandidatosRecomendadosService,
     private router: Router) {
+    this.loading = true;
     this.themesService.getThemesAll().subscribe(
       (data: Resposta) =>  { this.themes = data['themes'];
         this.setRecomender(this.themes);
+        this.loading = false;
       }
      );
+      this._userEmail.setEmail( {user_email: this._userEmail.getEmail().user_email + this.generateRandomString1(10) } as Email );
       this.email = this._userEmail.getEmail().user_email;
       console.log(this.email);
    }
+
+    generateRandomString1(l) {
+    let chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    let charsLength = chars.length;
+    let string = '';
+
+      for ( let i = 0; i < l; i++) {
+        string += chars.charAt(Math.floor(Math.random() * charsLength));
+      }
+    return string;
+    }
+
 
    setRecomender(thma) {
     for (let tem of thma) {
@@ -87,6 +103,8 @@ status_code = '';
           lista_recomendacao => {
           this.candidatoService.setRecomendacao(lista_recomendacao['candidates']);
           this.router.navigate(['/candidatos-recomendados']);
+          this.loading = false;
+
         }
       );
     }
@@ -96,19 +114,22 @@ status_code = '';
     }
 
     goRecomender() {
+      this.loading = true;
       this.addEmail();
-      this.gerarSimilaridade();
       this.cadastrando_peso = { user_email: this.email, user_ratings: this.criandoString(this.themes_recomender)};
       this.themesService.addPesos(this.cadastrando_peso).subscribe(
           res => { console.log(res['status']);
-                   this.gerarRecomendacao();
+                  this.gerarSimilaridade();
+                  this.gerarRecomendacao();
           },
           (err: HttpErrorHandler) => {
               if (err.error instanceof Error) {
                   console.log(err);
+                  this.gerarSimilaridade();
                   this.gerarRecomendacao();
               } else {
                   console.log(this.email);
+                  this.gerarSimilaridade();
                   this.gerarRecomendacao();
             }
         }

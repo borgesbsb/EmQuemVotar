@@ -6,6 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HttpErrorHandler, HandleError } from './http-error-handler.service';
 import { MessageService } from './message.service';
 import { CandidatosRecomendadosService } from './candidatos-recomendados.service';
+import { LoadingModule } from 'ngx-loading';
 
 import {MatSliderModule} from '@angular/material/slider';
 
@@ -53,6 +54,7 @@ import { StarRatingModule } from 'angular-star-rating';
     HttpModule,
     HttpClientModule,
     FormsModule,
+    LoadingModule,
     RouterModule.forRoot(ROUTES),
     StarRatingModule.forRoot(),
     MatSliderModule
