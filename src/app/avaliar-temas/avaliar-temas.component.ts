@@ -24,6 +24,7 @@ themes_recomender = [];
 cadastrando_peso: Resposta2;
 candidatosLista: Candidato[];
 status_code = '';
+public loading = false;
 
 
   // tslint:disable-next-line:max-line-length
@@ -33,9 +34,11 @@ status_code = '';
     private _userEmail: HomeService,
     private candidatoService: CandidatosRecomendadosService,
     private router: Router) {
+    this.loading = true;
     this.themesService.getThemesAll().subscribe(
       (data: Resposta) =>  { this.themes = data['themes'];
         this.setRecomender(this.themes);
+        this.loading = false;
       }
      );
       this._userEmail.setEmail( {user_email: this._userEmail.getEmail().user_email + this.generateRandomString1(10) } as Email );
@@ -100,6 +103,8 @@ status_code = '';
           lista_recomendacao => {
           this.candidatoService.setRecomendacao(lista_recomendacao['candidates']);
           this.router.navigate(['/candidatos-recomendados']);
+          this.loading = false;
+
         }
       );
     }
@@ -109,6 +114,7 @@ status_code = '';
     }
 
     goRecomender() {
+      this.loading = true;
       this.addEmail();
       this.cadastrando_peso = { user_email: this.email, user_ratings: this.criandoString(this.themes_recomender)};
       this.themesService.addPesos(this.cadastrando_peso).subscribe(
