@@ -17,12 +17,13 @@ export class CandidatosRecomendadosComponent implements OnInit {
   private similaridades: Similaridade[];
   listCandidatos = [] ;
   private email = '';
-
+  public loading = false;
   constructor(
     private _candidatosRecomendadosService: CandidatosRecomendadosService,
     private emailService: HomeService,
     config: NgbProgressbarConfig,
     private router: Router) {
+      this.loading = true;
       this._candidatosLista = _candidatosRecomendadosService.getRecomendacao();
       this.email = this.emailService.getEmail().user_email;
       this._candidatosRecomendadosService.getSimilaridade(this.email).subscribe(
@@ -34,6 +35,7 @@ export class CandidatosRecomendadosComponent implements OnInit {
           config.animated = true;
           config.type = 'danger';
           config.height = '20px';
+          this.loading = false;
         }
         );
 

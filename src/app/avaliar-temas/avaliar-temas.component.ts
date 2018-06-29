@@ -5,7 +5,7 @@ import {Theme, AvaliarTemasService, Resposta, Rating, Resposta2} from './avaliar
 import { HttpErrorHandler } from '../http-error-handler.service';
 import { CandidatosRecomendadosService, CandidatoDetathe, Candidato } from '../candidatos-recomendados.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import { HomeService } from '../home/home.service';
+import { HomeService, Email } from '../home/home.service';
 
 
 @Component({
@@ -38,9 +38,22 @@ status_code = '';
         this.setRecomender(this.themes);
       }
      );
+      this._userEmail.setEmail( {user_email: this._userEmail.getEmail().user_email + this.generateRandomString1(10) } as Email );
       this.email = this._userEmail.getEmail().user_email;
       console.log(this.email);
    }
+
+    generateRandomString1(l) {
+    let chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    let charsLength = chars.length;
+    let string = '';
+
+      for ( let i = 0; i < l; i++) {
+        string += chars.charAt(Math.floor(Math.random() * charsLength));
+      }
+    return string;
+    }
+
 
    setRecomender(thma) {
     for (let tem of thma) {
@@ -97,18 +110,20 @@ status_code = '';
 
     goRecomender() {
       this.addEmail();
-      this.gerarSimilaridade();
       this.cadastrando_peso = { user_email: this.email, user_ratings: this.criandoString(this.themes_recomender)};
       this.themesService.addPesos(this.cadastrando_peso).subscribe(
           res => { console.log(res['status']);
-                   this.gerarRecomendacao();
+                  this.gerarSimilaridade();
+                  this.gerarRecomendacao();
           },
           (err: HttpErrorHandler) => {
               if (err.error instanceof Error) {
                   console.log(err);
+                  this.gerarSimilaridade();
                   this.gerarRecomendacao();
               } else {
                   console.log(this.email);
+                  this.gerarSimilaridade();
                   this.gerarRecomendacao();
             }
         }
