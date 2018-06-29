@@ -1,4 +1,5 @@
 <div class="temasContent">
+    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '20px' }"></ngx-loading>
 	<h3 class=" text-muted text-center mt-4 font-weight-light">Avalie os temas que você mais tem interesse nas propostas de um candidato.</h3>
 	<div class="row rowTemas">
 		<div *ngFor= "let tema of themes_recomender" class="col-xs-6 col-sm-3 col-md-3 col-lg-3 text-center">
@@ -6,7 +7,7 @@
       		<mat-slider thumbLabel tickInterval="1" min="1"  max="5" step="1" [(value)]="tema.peso" (input)='setSlidervalue($event,tema)' valVar="someValue"  ></mat-slider>
     	</div>
   	</div>
-	
+
 	<div class="text-center">
 		<button (click)= "goRecomender()"  class="btn btn-outline-success btn-xl text-uppercase">Buscar</button>
 	</div>
